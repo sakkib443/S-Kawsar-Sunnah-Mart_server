@@ -1,0 +1,20 @@
+node_modules
+dist
+*.log
+
+# Environment secrets — NEVER commit (.env.example stays as a template)
+.env
+.env.local
+.env.*.local
+
+# Locally-stored image uploads (disk-storage mode)
+uploads/
+
+# misc
+.DS_Store
+.vercel
+*.tsbuildinfo
+
+# Render bulk-import env files (real secrets — never commit)
+render.env
+.env.render
