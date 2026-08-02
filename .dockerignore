@@ -1,0 +1,15 @@
+node_modules
+dist
+uploads
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+npm-debug.log*
+*.log
+.DS_Store
+README.md
+scripts
+.vscode
+.idea
