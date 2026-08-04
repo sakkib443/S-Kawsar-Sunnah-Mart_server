@@ -63,7 +63,7 @@ const OrderService = {
             Order.find().populate('user', 'firstName lastName email phone').populate('items.product', 'name thumbnail'),
             normalizedQuery
         )
-            .search(['orderId'])   // enable admin order-list search by human order id (ABM-XXXX)
+            .search(['orderId'])   // enable admin order-list search by human order id (SKS-XXXX)
             .filter()              // status tabs (?status=shipped, etc.)
             .sort()
             .paginate();
@@ -85,7 +85,7 @@ const OrderService = {
             Order.find({ user: userId }).populate('items.product', 'name thumbnail slug'),
             normalizedQuery
         )
-            .search(['orderId'])   // enable "My Orders" search by human order id (ABM-XXXX)
+            .search(['orderId'])   // enable "My Orders" search by human order id (SKS-XXXX)
             .filter()              // enable the status tabs (?status=shipped, etc.)
             .sort()
             .paginate();

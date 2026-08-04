@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import config from '../../config';
 
 const orderItemSchema = new Schema({
     product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
@@ -86,7 +87,7 @@ const orderSchema = new Schema(
 orderSchema.pre('save', async function (next) {
     if (!this.orderId) {
         const count = await (this.constructor as any).countDocuments();
-        this.orderId = `ABM-${String(count + 1).padStart(4, '0')}`;
+        this.orderId = `${config.order_id_prefix}-${String(count + 1).padStart(4, '0')}`;
     }
     next();
 });

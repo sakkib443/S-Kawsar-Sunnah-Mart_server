@@ -2,7 +2,7 @@ import express from 'express';
 import ProductController from './product.controller';
 import { authMiddleware, authorizeRoles } from '../../middlewares/auth';
 import validateRequest from '../../middlewares/validateRequest';
-import { createProductValidation, updateProductValidation, bulkStatusValidation, bulkDeleteValidation, bulkUploadValidation } from './product.validation';
+import { createProductValidation, updateProductValidation, bulkStatusValidation, bulkDeleteValidation, bulkUploadArrayValidation } from './product.validation';
 
 const router = express.Router();
 
@@ -20,7 +20,7 @@ router.get('/:id', ProductController.getById);
 // ── Admin routes ────────────────────────────────────────────────
 router.get('/admin/stats', authMiddleware, authorizeRoles('admin'), ProductController.getStats);
 router.get('/admin/low-stock', authMiddleware, authorizeRoles('admin'), ProductController.getLowStock);
-router.post('/admin/bulk-upload', authMiddleware, authorizeRoles('admin'), validateRequest(bulkUploadValidation), ProductController.bulkUpload);
+router.post('/admin/bulk-upload', authMiddleware, authorizeRoles('admin'), validateRequest(bulkUploadArrayValidation), ProductController.bulkUpload);
 router.post('/', authMiddleware, authorizeRoles('admin'), validateRequest(createProductValidation), ProductController.create);
 router.patch('/admin/bulk-status', authMiddleware, authorizeRoles('admin'), validateRequest(bulkStatusValidation), ProductController.bulkUpdateStatus);
 router.delete('/admin/bulk-delete', authMiddleware, authorizeRoles('admin'), validateRequest(bulkDeleteValidation), ProductController.bulkDelete);
