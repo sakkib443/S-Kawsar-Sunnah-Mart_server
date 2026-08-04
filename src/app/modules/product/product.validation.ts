@@ -149,6 +149,18 @@ export const bulkUploadValidation = z.object({
     }),
 });
 
+// ── Bulk upload — lightweight gate (per-row validation happens in the service) ──
+// Only asserts `products` is a non-empty array. Each row is then validated
+// INDIVIDUALLY inside ProductService.bulkCreate (safeParse), so one malformed
+// row is skipped + reported in `failed[]` instead of aborting the whole batch.
+// (Using the strict `bulkUploadValidation` here would 400 the entire request on
+//  the first bad row — defeating the resilient per-row import.)
+export const bulkUploadArrayValidation = z.object({
+    body: z.object({
+        products: z.array(z.unknown()).min(1, 'At least one product is required'),
+    }),
+});
+
 export const bulkStatusValidation = z.object({
     body: z.object({
         ids:    z.array(z.string()).min(1),

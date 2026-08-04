@@ -29,7 +29,8 @@ const ReviewController = {
         sendResponse(res, { statusCode: 200, success: true, message: 'Review updated', data: review });
     }),
     delete: catchAsync(async (req: Request, res: Response) => {
-        await ReviewService.deleteReview(req.params.id, req.user!.userId, req.user!.role === 'admin');
+        const isStaff = req.user!.role === 'admin' || req.user!.role === 'superadmin';
+        await ReviewService.deleteReview(req.params.id, req.user!.userId, isStaff);
         sendResponse(res, { statusCode: 200, success: true, message: 'Review deleted' });
     }),
     likeReview: catchAsync(async (req: Request, res: Response) => {
