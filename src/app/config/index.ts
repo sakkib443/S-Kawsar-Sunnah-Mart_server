@@ -8,6 +8,9 @@ export default {
     port: process.env.PORT || 5000,
     database_url: process.env.DATABASE_URL || 'mongodb://localhost:27017/skawsarsunnahmart',
 
+    // Human-readable order id prefix (e.g. SKS-0001). White-label: override via env.
+    order_id_prefix: process.env.ORDER_ID_PREFIX || 'SKS',
+
     jwt: {
         access_secret: process.env.JWT_ACCESS_SECRET || 'skawsarsunnahmart-access-secret',
         refresh_secret: process.env.JWT_REFRESH_SECRET || 'skawsarsunnahmart-refresh-secret',

@@ -283,7 +283,8 @@ const getInvoiceData = async (
     requester: { userId: string; role: string }
 ): Promise<IInvoiceData> => {
     const order = await fetchOrder(orderId);
-    if (requester.role !== 'admin' && order.user?._id?.toString() !== requester.userId) {
+    const isStaff = requester.role === 'admin' || requester.role === 'superadmin';
+    if (!isStaff && order.user?._id?.toString() !== requester.userId) {
         throw new AppError(403, 'You do not have permission to view this invoice');
     }
     return buildCustomerInvoice(order);
@@ -294,7 +295,8 @@ const getInvoicePdf = async (
     requester: { userId: string; role: string }
 ): Promise<Buffer> => {
     const order = await fetchOrder(orderId);
-    if (requester.role !== 'admin' && order.user?._id?.toString() !== requester.userId) {
+    const isStaff = requester.role === 'admin' || requester.role === 'superadmin';
+    if (!isStaff && order.user?._id?.toString() !== requester.userId) {
         throw new AppError(403, 'You do not have permission to view this invoice');
     }
     return generateInvoicePdf(buildCustomerInvoice(order));

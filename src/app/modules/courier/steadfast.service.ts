@@ -24,7 +24,7 @@ const headers = () => ({
 });
 
 export interface CreateConsignmentInput {
-    invoice: string;          // unique per parcel (e.g. ABM-0001-ab12)
+    invoice: string;          // unique per parcel (e.g. SKS-0001-ab12)
     recipientName: string;
     recipientPhone: string;   // 11-digit BD number
     recipientAddress: string;
